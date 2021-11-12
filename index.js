@@ -40,28 +40,24 @@ const startStream = (apiKey) => {
 
 // @param: {data} object - data to be sent to the server
 // @param: {apiKey} string - livepeer api key
-function connectToLivepeer(data, apiKey) {
+const getStreamUrl = async (data, apiKey) => {
+    const url = `https://livepeer.com/api/session?limit=20&parentId=${data.id}`;
 
-    const getStreamUrl = async () => {
-        const url = `https://livepeer.com/api/session?limit=20&parentId=${data.id}`;
+    const listOfAllStreams = await axios.get(url, {
+        headers: {
+            Authorization: `Bearer ${apiKey}`,
+        },
+    });
 
-        const listOfAllStreams = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${apiKey}`,
-            },
-        });
+    if (listOfAllStreams.data.length === 0) {
+        alert("No stream detected");
+        return;
+    }
+    
+    console.log(listOfAllStreams);
+    let streamUrl = listOfAllStreams.data[0].mp4Url;
 
-        if (listOfAllStreams.data.length === 0) {
-            alert("No stream detected");
-            return;
-        }
-        
-        console.log(listOfAllStreams);
-        let streamUrl = listOfAllStreams.data[0].mp4Url;
+    if (streamUrl === "") alert("stream is currently processing");
+};
 
-        if (streamUrl === "") alert("stream is currently processing");
-    };
-}
-
-
-module.exports = {startStream, connectToLivepeer};
+module.exports = {startStream, getStreamUrl};
