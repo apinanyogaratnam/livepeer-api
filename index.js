@@ -30,12 +30,11 @@ const content = {
 };
 
 // @param: {apiKey} string - livepeer api key
-const startStream = (apiKey) => {
+const startStream = async (apiKey) => {
     const livepeerObj = new Livepeer(apiKey);
-    livepeerObj.Stream.create(content).then((res) => {
-        console.log(res);
-        return res;
-    });
+    const data = await livepeerObj.Stream.create(content);
+
+    return data;
 };
 
 // @param: {data} object - data to be sent to the server
@@ -50,14 +49,20 @@ const getStreamUrl = async (data, apiKey) => {
     });
 
     if (listOfAllStreams.data.length === 0) {
-        alert("No stream detected");
-        return;
+        console.log('no streams detected');
+
+        return undefined;
     }
     
-    console.log(listOfAllStreams);
     let streamUrl = listOfAllStreams.data[0].mp4Url;
 
-    if (streamUrl === "") alert("stream is currently processing");
+    if (streamUrl === "") {
+        console.log("stream is currently processing");
+
+        return undefined;
+    }
+
+    return streamUrl;
 };
 
 module.exports = {startStream, getStreamUrl};
