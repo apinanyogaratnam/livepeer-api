@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/apinanyogaratnam/livepeer-api/issues"
   },
-  "homepage": "https://github.com/apinanyogaratnam/livepeer-api#readme"
+  "homepage": "https://github.com/apinanyogaratnam/livepeer-api#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "livepeer-nodejs": "^1.0.3"
+  }
 }
