@@ -25,7 +25,7 @@ const getData = async () => {
 ```
 
 ## get the stream url
-@param {object} data - the data returned from the startStream call
+@param {object} data - the data returned from the startStream call <br />
 @param {string} apiKey - your api key
 ``` javascript
 const livepeer = require('livepeer-api');
