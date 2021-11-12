@@ -29,6 +29,7 @@ const content = {
     "record": true
 };
 
+// @param: {apiKey} string - livepeer api key
 const startStream = (apiKey) => {
     const livepeerObj = new Livepeer(apiKey);
     livepeerObj.Stream.create(content).then((res) => {
@@ -37,6 +38,8 @@ const startStream = (apiKey) => {
     });
 };
 
+// @param: {data} object - data to be sent to the server
+// @param: {apiKey} string - livepeer api key
 function connectToLivepeer(data, apiKey) {
 
     const getStreamUrl = async () => {
